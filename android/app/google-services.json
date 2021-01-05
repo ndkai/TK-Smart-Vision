@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "816784812971",
+    "project_id": "faikul-1dd30",
+    "storage_bucket": "faikul-1dd30.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:816784812971:android:87658a0c6101cea52180ee",
+        "android_client_info": {
+          "package_name": "com.titkul.faikul"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "816784812971-scua3khi7681i8mjh07eu04neubjdijn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0qm17zXaudh3Q3gbzdgEGh5EV4g5ui7Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "816784812971-scua3khi7681i8mjh07eu04neubjdijn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
