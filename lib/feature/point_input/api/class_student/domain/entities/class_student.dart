@@ -1,3 +1,5 @@
+import 'package:fai_kul/feature/login/data/models/login_swagger.dart';
+
 class ClassStudentSwagger {
   bool success;
   int statusCode;
@@ -64,7 +66,7 @@ class Items {
   int classId;
   Class classx;
   int parentId;
-  Null parent;
+  Parent parent;
 
   Items({this.id, this.code, this.fullName, this.phoneNumber, this.dob, this.gender, this.cityCode, this.city, this.districtCode, this.district, this.wardCode, this.ward, this.address, this.hadImages, this.classId, this.classx, this.parentId, this.parent});
 
@@ -86,7 +88,7 @@ class Items {
   classId = json['classId'];
   classx = json['class'] != null ? new Class.fromJson(json['class']) : null;
   parentId = json['parentId'];
-  parent = json['parent'];
+  parent!= null ? parent = json['parent']:null;
   }
 
   Map<String, dynamic> toJson() {
@@ -121,8 +123,8 @@ class Class {
   int session;
   int departmentId;
   Department department;
-  Null teacherId;
-  Null teacher;
+  int teacherId;
+  Teacher teacher;
 
   Class({this.id, this.name, this.session, this.departmentId, this.department, this.teacherId, this.teacher});
 
@@ -133,7 +135,7 @@ class Class {
     departmentId = json['departmentId'];
     department = json['department'] != null ? new Department.fromJson(json['department']) : null;
     teacherId = json['teacherId'];
-    teacher = json['teacher'];
+    teacher!= null? teacher = json['teacher']:null;
   }
 
   Map<String, dynamic> toJson() {

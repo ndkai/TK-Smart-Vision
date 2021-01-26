@@ -39,7 +39,6 @@ class RemoteFeeDataSourceImpl implements RemoteFeeDataSource{
           });
       print("Fee_getURL: ${response.statusCode}");
       if (response.statusCode == 200) {
-        print("Fee_getURL: ${response.body}");
         var feeId =
         FeeID.fromJson(json.decode((response.body)));
         print("Fee_getURLasas${feeId.data.length}");
@@ -52,10 +51,16 @@ class RemoteFeeDataSourceImpl implements RemoteFeeDataSource{
                 "content-type": "application/json",
                 'Authorization': 'Bearer ${lr.data.token}', // k co header la failed 415
               });
+          print("Fee_getURL11: ${response1.statusCode}");
           if(response1.statusCode == 200){
-            var feeSwagger =
-            FeeSwagger.fromJson(json.decode((response1.body)));
-            feeSwaggers.add(feeSwagger);
+            var  feeSwagger;
+            try{
+              feeSwagger =
+                  FeeSwagger.fromJson(json.decode((response1.body)));
+              feeSwaggers.add(feeSwagger);
+            } catch(e){
+              print("Loi lol gi day ${e.toString()}");
+            }
 
           }
 

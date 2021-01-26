@@ -2,11 +2,13 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 import 'package:fai_kul/feature/dayoff/dayoff_page.dart';
+import 'package:fai_kul/feature/dayoff/school_leave_letter/api_method/employee_swagger.dart';
 import 'package:fai_kul/feature/login/domain/entities/login_response.dart';
 import 'package:fai_kul/feature/login/domain/use_cases/login.dart';
 import 'package:fai_kul/feature/login/presentation/pages/login_input_page.dart';
 import 'package:fai_kul/feature/manger_feature/statictis/presentation/pages/manager_statictic_page.dart';
 import 'package:fai_kul/feature/notification/notification_api/presentation/pages/notification_page.dart';
+import 'package:fai_kul/feature/point_input/api/contact_book/domain/entities/ContactBookSwagger.dart';
 import 'package:fai_kul/feature/study_point/presentation/pages/studypoint_page.dart';
 import 'package:fai_kul/feature/top_recorder/data/data_sources/remote_recorder_datasource.dart';
 import 'package:fai_kul/feature/top_recorder/presentation/pages/comment_page.dart';
@@ -31,6 +33,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:signalr_core/signalr_core.dart';
 import 'feature/change_pass/presentation/change_pass_page.dart';
 import 'feature/choosing_role/choosing_role.dart';
+import 'feature/dayoff/school_leave_letter/schoolleave_page.dart';
 import 'feature/foreground_service/foreground_service.dart';
 import 'feature/login/data/models/login_swagger.dart';
 import 'feature/point_input/api/class_student/presentation/pages/class_student_page.dart';
@@ -55,6 +58,7 @@ void main() async {
 
 SharedPreferences prefs;
 LoginSwagger appUser;
+EmployeeSwagger appStudent;
 
 class MyApp extends StatefulWidget {
   @override
@@ -146,7 +150,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver{
         PageRoutes.login: (context) => LoginPage(),
         PageRoutes.info: (context) => InfoPage(),
         PageRoutes.management: (context) => ManagementPage(),
-        PageRoutes.location: (context) => LocationPage(),
+        // PageRoutes.location: (context) => LocationPage(),
         PageRoutes.attendance: (context) => AttendancePage(),
         PageRoutes.schedule: (context) => SchedulePage(),
         PageRoutes.traincamera: (context) => TrainCamera(),
@@ -163,6 +167,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver{
         PageRoutes.studyPoint: (context) => StudyPointPage(),
         PageRoutes.schoolClassPage: (context) => SchoolClassPage(),
         PageRoutes.classStudentPage: (context) => ClassStudentPage(),
+        PageRoutes.schoolLeavepage: (context) => SchoolLeavePage(),
       },
       debugShowCheckedModeBanner: false,
     );

@@ -1,7 +1,10 @@
 import 'dart:convert';
 
+import 'package:fai_kul/core/constants.dart';
+import 'package:fai_kul/feature/attendance/attendance_method.dart';
 import 'package:fai_kul/feature/camera/face_detection_camera.dart';
 import 'package:fai_kul/feature/choosing_role/choosing_role.dart';
+import 'package:fai_kul/feature/dayoff/school_leave_letter/api_method/employee_swagger.dart';
 import 'package:fai_kul/feature/login/data/models/login_swagger.dart';
 import 'package:fai_kul/feature/login/presentation/components/already_have_an_account_acheck.dart';
 import 'package:fai_kul/feature/login/presentation/components/rounded_button.dart';
@@ -11,6 +14,7 @@ import 'package:fai_kul/feature/login/presentation/manager/login/login_bloc.dart
 import 'package:fai_kul/feature/login/presentation/widgets/Signup/signup_screen.dart';
 import 'package:fai_kul/feature/login/presentation/widgets/Welcome/welcome_screen.dart';
 import 'package:fai_kul/feature/manger_feature/statictis/presentation/pages/manager_statictic_page.dart';
+import 'package:fai_kul/feature/point_input/api/contact_book/domain/entities/ContactBookSwagger.dart';
 import 'package:fai_kul/main/main_utils.dart';
 import 'package:fai_kul/main/nar_drawer/home_page.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +54,7 @@ class _BodyState extends State<Body> {
         LoginSwagger lr = LoginSwagger.fromJson(json.decode(string));
         if(lr.data.roleName == "PHUHUYNH" || lr.data.roleName == "GIAOVIEN" ){
           appUser = lr;
+          getCurrentEmployee();
           print("Nguoi dung hien tai la ${lr.data.roleName}");
           return HomePage(
             key: textGlobalKey,
@@ -102,5 +107,27 @@ class _BodyState extends State<Body> {
     _locationData = await location.getLocation();
     log("locationx: ${_locationData.latitude}");
     log("locationx: ${_locationData.longitude}");
+  }
+
+
+  Future<EmployeeSwagger> getCurrentEmployee() async {
+    final response = await client.get(
+      "$mainUrl/v1/Employee/${appUser.data.parent != null ? appUser.data.parent.id : appUser.data.teacher.id}",
+      headers: {
+        "Accept": "application/json",
+        "content-type": "application/json",
+        'Authorization': 'Bearer ${appUser.data.token}',
+        // k co header la failed 415
+      },
+    );
+    print("changePass${response.statusCode}");
+    if (response.statusCode == 200) {
+      print("getCurrentEmployee thanh cong");
+      var swagger = EmployeeSwagger.fromJson(json.decode((response.body)));
+      print("getCurrentEmployee thanh cong ${swagger.data.fullName}");
+      appStudent = swagger;
+      return swagger;
+    }
+    return null;
   }
 }

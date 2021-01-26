@@ -9,6 +9,7 @@ import 'package:fai_kul/feature/attendance_his/domain/repositories/history_atten
 import 'package:fai_kul/feature/attendance_his/domain/use_cases/get_local_attendance_his.dart';
 import 'package:fai_kul/feature/change_pass/change_pass_api.dart';
 import 'package:fai_kul/feature/choosing_role/choosing_role.dart';
+import 'package:fai_kul/feature/dayoff/school_leave_list/presentation/pages/schoolleave_list_page.dart';
 import 'package:fai_kul/feature/login/data/models/login_swagger.dart';
 import 'package:fai_kul/main/component/bottom_nar/bottom_nar.dart';
 import 'package:fai_kul/main/component/home_page/card.dart';
@@ -90,9 +91,11 @@ class _HomePageState extends State<HomePage> {
     }
 
     Size size = MediaQuery.of(context).size;
-    return WillPopScope(
-        onWillPop: _onWillPop,
-        child: Scaffold(
+    return
+      // WillPopScope(
+      //   onWillPop: _onWillPop,
+      //   child:
+        Scaffold(
             appBar: AppBar(
               title: Text("Trang chủ"),
               actions: <Widget>[
@@ -145,7 +148,8 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(height: 20),
                 ],
               ),
-            ))));
+            )));
+    // );
   }
 
   Widget slider(Size size) {
@@ -310,6 +314,69 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.greenAccent,
                           ),
                         ),
+                ),
+                Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    // onTap: () => Navigator.pushReplacementNamed(
+                    //     context, PageRoutes.schedule), // handle your onTap here
+                    child: CustomCard2(
+                      image: 'assets/icons/comunication.png',
+                      title: "Trao đổi thông tin",
+                      isActive: true,
+                      color: Colors.blueAccent,
+                    ),
+                  ),
+                ),
+                Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () => Navigator.pushReplacementNamed(
+                        context, PageRoutes.info), // handle your onTap here
+                    child: CustomCard2(
+                      image: 'assets/icons/support.png',
+                      title: "Hỗ trợ",
+                      isActive: true,
+                      color: Colors.redAccent,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Material(
+                  color: Colors.transparent,
+                  child: appUser.data.roleName == "PHUHUYNH"
+                      ? InkWell(
+                    onTap: () =>  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SchoolLeaveListPage()),
+                    ),
+                    // handle your onTap here
+                    child: CustomCard2(
+                      image: 'assets/icons/school_leave.png',
+                      title: "Nghỉ phép",
+                      isActive: true,
+                      color: Colors.redAccent,
+                    ),
+                  )
+                      : InkWell(
+                    onTap: () => Navigator.pushReplacementNamed(
+                        context, PageRoutes.schoolClassPage),
+                    // handle your onTap here
+                    child: CustomCard2(
+                      image: 'assets/icons/mobietracking.png',
+                      title: "Nhập điểm",
+                      isActive: true,
+                      color: Colors.greenAccent,
+                    ),
+                  ),
                 ),
                 Material(
                   color: Colors.transparent,

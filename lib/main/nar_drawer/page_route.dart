@@ -2,6 +2,7 @@ import 'package:fai_kul/feature/attendance_his/presentation/pages/attendance_his
 import 'package:fai_kul/feature/change_pass/presentation/change_pass_page.dart';
 import 'package:fai_kul/feature/choosing_role/choosing_role.dart';
 import 'package:fai_kul/feature/dayoff/dayoff_page.dart';
+import 'package:fai_kul/feature/dayoff/school_leave_letter/schoolleave_page.dart';
 import 'package:fai_kul/feature/location/location_page.dart';
 import 'package:fai_kul/feature/login/presentation/pages/login_input_page.dart';
 import 'package:fai_kul/feature/login/presentation/pages/loginpage.dart';
@@ -28,7 +29,7 @@ class PageRoutes {
   static const String login = LoginPage.routeName;
   static const String info = InfoPage.routeName;
   static const String management = ManagementPage.routeName;
-  static const String location = LocationPage.routeName;
+  // static const String location = LocationPage.routeName;
   static const String schedule = SchedulePage.routeName;
   static const String traincamera = TrainCamera.routeName;
   static const String feePage = FeePage.routeName;
@@ -44,4 +45,5 @@ class PageRoutes {
   static const String studyPoint = StudyPointPage.routeName;
   static const String classStudentPage = ClassStudentPage.routeName;
   static const String schoolClassPage = SchoolClassPage.routeName;
+  static const String schoolLeavepage = SchoolLeavePage.routeName;
 }

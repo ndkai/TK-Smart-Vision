@@ -71,6 +71,9 @@ dependencies:
   url_launcher: ^5.7.10
   device_apps: ^1.2.0
   flutter_appavailability: ^0.0.21
+  #paint
+  painter: ^0.4.0
+  flutter_colorpicker: ^0.3.5
   intl: ">=0.14.0"
 
 dev_dependencies:
@@ -89,7 +92,6 @@ flutter_icons:
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

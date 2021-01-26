@@ -18,7 +18,7 @@ part 'login_event.dart';
 
 part 'login_state.dart';
 
-const String SERVER_FAILURE_MESSAGE = 'Something wrong! Try again';
+const String SERVER_FAILURE_MESSAGE = 'Có lỗi xảy ra, vui lòng thử lại!';
 const String CACHE_FAILURE_MESSAGE = 'Cache Failure';
 const String INVALID_INPUT_FAILURE_MESSAGE =
     'Invalid Input - The number must be a positive integer or zero.';

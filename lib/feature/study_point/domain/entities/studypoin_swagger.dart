@@ -1,3 +1,5 @@
+import 'package:fai_kul/feature/login/data/models/login_swagger.dart';
+
 class StudyPointSwagger {
   bool success;
   int statusCode;
@@ -188,8 +190,8 @@ class Class {
   int session;
   int departmentId;
   Department department;
-  Null teacherId;
-  Null teacher;
+  int teacherId;
+  Teacher teacher;
 
   Class({this.id, this.name, this.session, this.departmentId, this.department, this.teacherId, this.teacher});
 
@@ -199,8 +201,12 @@ class Class {
     session = json['session'];
     departmentId = json['departmentId'];
     department = json['department'] != null ? new Department.fromJson(json['department']) : null;
-    teacherId = json['teacherId'];
-    teacher = json['teacher'];
+      if(teacherId!=null){
+      teacherId = json['teacherId'];
+    }
+    if(teacher!=null){
+      teacher = json['teacher'];
+    }
   }
 
   Map<String, dynamic> toJson() {

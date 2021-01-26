@@ -27,8 +27,8 @@ Future<bool> attendanceToServer(Function callback) async {
     "temperature": 0,
     "teacherId": appUser.data.id
   });
-  final response = await client.post(
-      mainUrl+"/v1/TeacherAttendance",
+  final response = await client.post(                            //
+      mainUrl+"/v1/ChamCong/ChamCongMobile",
       headers: {
         "Accept": "application/json",
         "content-type": "application/json"       // k co header la failed 415

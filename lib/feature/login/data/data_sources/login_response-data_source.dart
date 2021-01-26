@@ -40,10 +40,15 @@ class LoginResponseImpl implements LoginResponseDataSource {
         body: body).timeout(Duration(seconds: 15));
     print("lol mâm ${response.statusCode}");
     if (response.statusCode == 200 || response.statusCode == 201) {
-      log("xxx1: ${json.decode(response.body)}");
       prefs.setString(SAVE_LOGIN_RESPONSE, response.body);
       var swagger;
-           swagger = LoginSwagger.fromJson(json.decode((response.body)));
+      try{
+        swagger = LoginSwagger.fromJson(json.decode((response.body)));
+      } catch(e){
+        print("lol gi day ta ${e.toString()}");
+      }
+
+      log("xxx1: ${json.decode(response.body)}");
       return swagger;
     }
       else {

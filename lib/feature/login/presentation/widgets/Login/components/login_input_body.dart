@@ -1,4 +1,9 @@
+import 'dart:convert';
+
+import 'package:fai_kul/core/constants.dart';
+import 'package:fai_kul/feature/attendance/attendance_method.dart';
 import 'package:fai_kul/feature/choosing_role/choosing_role.dart';
+import 'package:fai_kul/feature/dayoff/school_leave_letter/api_method/employee_swagger.dart';
 import 'package:fai_kul/feature/manger_feature/statictis/presentation/pages/manager_statictic_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fai_kul/feature/login/presentation/components/already_have_an_account_acheck.dart';
@@ -83,6 +88,7 @@ class _LoginInputBodyState extends State<LoginInputBody> {
         if(state.loginResponse.data.roleName == "PHUHUYNH" || state.loginResponse.data.roleName == "GIAOVIEN" ){
           appUser = state.loginResponse;
           print("dang nhap vao r ne ${state.loginResponse.data.email}");
+          getCurrentEmployee();
           return HomePage(
             key: textGlobalKey,
           );
@@ -161,5 +167,26 @@ class _LoginInputBodyState extends State<LoginInputBody> {
 
   void clear() {
     BlocProvider.of<LoginBloc>(context).add(ClearE());
+  }
+
+  Future<EmployeeSwagger> getCurrentEmployee() async {
+    final response = await client.get(
+      "$mainUrl/v1/Employee/${appUser.data.parent != null ? appUser.data.parent.id : appUser.data.teacher.id}",
+      headers: {
+        "Accept": "application/json",
+        "content-type": "application/json",
+        'Authorization': 'Bearer ${appUser.data.token}',
+        // k co header la failed 415
+      },
+    );
+    print("changePass${response.statusCode}");
+    if (response.statusCode == 200) {
+      print("getCurrentEmployee thanh cong");
+      var swagger = EmployeeSwagger.fromJson(json.decode((response.body)));
+      print("getCurrentEmployee thanh cong ${swagger.data.fullName}");
+      appStudent = swagger;
+      return swagger;
+    }
+    return null;
   }
 }

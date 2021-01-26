@@ -1,4 +1,6 @@
 
+import 'package:fai_kul/feature/dayoff/school_leave_letter/schoolleave_page.dart';
+import 'package:fai_kul/feature/dayoff/school_leave_list/presentation/pages/schoolleave_list_page.dart';
 import 'package:fai_kul/feature/login/domain/entities/login_response.dart';
 import 'package:fai_kul/feature/notification/notification.dart';
 import 'package:fai_kul/main.dart';
@@ -29,6 +31,16 @@ class NavigationDrawer extends StatelessWidget {
             text: 'Đổi mật khẩu',
             onTap: () =>
                 Navigator.pushReplacementNamed(context, PageRoutes.changePass),
+          ),
+          createDrawerBodyItem(
+            icon: Icons.loop_rounded,
+            text: 'Nghỉ phép',
+            onTap: () =>
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SchoolLeaveListPage()),
+                )
           ),
           createDrawerBodyItem(
             icon: Icons.contact_phone,

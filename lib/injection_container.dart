@@ -1,6 +1,11 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:fai_kul/feature/attendance/attendance_method.dart';
 import 'package:fai_kul/feature/attendance_his/data/repositories/history_attendance_repository_impl.dart';
+import 'package:fai_kul/feature/dayoff/school_leave_list/data/data_sources/remote_school_leave_leave_dts.dart';
+import 'package:fai_kul/feature/dayoff/school_leave_list/data/repositories/schooleave_repo_ipml.dart';
+import 'package:fai_kul/feature/dayoff/school_leave_list/domain/repositories/school_leave_list_repo.dart';
+import 'package:fai_kul/feature/dayoff/school_leave_list/domain/use_cases/get_school_leave_list.dart';
+import 'package:fai_kul/feature/dayoff/school_leave_list/presentation/school_leave_list/school_leave_list_bloc.dart';
 import 'package:fai_kul/feature/login/domain/use_cases/get_current_user.dart';
 import 'package:fai_kul/feature/manger_feature/statictis/data/data_sources/remote_statistic_datasourse.dart';
 import 'package:fai_kul/feature/manger_feature/statictis/data/repositories/manager_statistic_repository_impl.dart';
@@ -78,11 +83,15 @@ Future<void> init() async {
   );
 
   sl.registerFactory(
+    () => SchoolLeaveListBloc(getSchoolLeaveList: sl()),
+  );
+
+  sl.registerFactory(
     () => TAttendanceHisBloc(ah: sl(), ahbp: sl(), inputConverter: sl()),
   );
 
   sl.registerFactory(
-        () => ContactBookBloc(getContactBook: sl()),
+    () => ContactBookBloc(getContactBook: sl()),
   );
 
   sl.registerFactory(
@@ -110,6 +119,7 @@ Future<void> init() async {
   );
   //use case
   sl.registerLazySingleton(() => Login(sl()));
+  sl.registerLazySingleton(() => GetSchoolLeaveList(sl()));
   sl.registerLazySingleton(() => GetContactBook(sl()));
   sl.registerLazySingleton(() => GetCurrentUser(sl()));
   sl.registerLazySingleton(() => GetAttendanceHistoryByPage(sl()));
@@ -134,10 +144,15 @@ Future<void> init() async {
         networkInfo: sl(),
       ));
 
+  sl.registerLazySingleton<SchoolLeaveListRepo>(() => SchoolLeaveRepoListImpl(
+        dataSource: sl(),
+        networkInfo: sl(),
+      ));
+
   sl.registerLazySingleton<ContactBookRepo>(() => ContactBookRepoImpl(
-  remoteContactbookDataSource: sl(),
-    networkInfo: sl(),
-  ));
+        remoteContactbookDataSource: sl(),
+        networkInfo: sl(),
+      ));
 
   sl.registerLazySingleton<SchoolClassRepo>(() => SchoolClassRepoImpl(
         dataSource: sl(),
@@ -165,15 +180,19 @@ Future<void> init() async {
       ManagerStatisticRepoImpl(networkInfo: sl(), remoteDataSource: sl()));
   //data sourse
   sl.registerLazySingleton<LoginResponseDataSource>(
-        () => LoginResponseImpl(client: sl()),
+    () => LoginResponseImpl(client: sl()),
+  );
+
+  sl.registerLazySingleton<SchoolLeaveListDataSource>(
+    () => SchoolLeaveDataSourceIpm(client: sl()),
   );
 
   sl.registerLazySingleton<RemoteContactbookDataSource>(
-        () => RemoteContactbookDataSourceImpl(client: sl()),
+    () => RemoteContactbookDataSourceImpl(client: sl()),
   );
 
   sl.registerLazySingleton<RemoteClassStudentDatasource>(
-        () => RemoteClassStudentDatasourceImpl(client: sl()),
+    () => RemoteClassStudentDatasourceImpl(client: sl()),
   );
 
   sl.registerLazySingleton<RemoteSchoolClassDataSource>(

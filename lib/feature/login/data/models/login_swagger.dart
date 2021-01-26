@@ -116,7 +116,7 @@ class Teacher {
   departmentId = json['departmentId'];
   userName = json['userName'];
   department = json['department'] != null ? new Department.fromJson(json['department']) : null;
-  classx = json['class'];
+  classx!=null? classx= json['class']:null;
   userId = json['userId'];
   }
 

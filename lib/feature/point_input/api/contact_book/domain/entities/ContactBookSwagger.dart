@@ -181,7 +181,9 @@ class Class {
     departmentId = json['departmentId'];
     department = json['department'] != null ? new Department.fromJson(json['department']) : null;
     teacherId = json['teacherId'];
-    teacher = json['teacher'];
+    if(teacher != null){
+      teacher = json['teacher'];
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -261,7 +263,7 @@ class Parent {
   String phoneNumber;
   String email;
   int employeeId;
-  Null userId;
+  String userId;
 
   Parent({this.id, this.fullName, this.userName, this.phoneNumber, this.email, this.employeeId, this.userId});
 
