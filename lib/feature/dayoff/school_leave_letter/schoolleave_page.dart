@@ -18,7 +18,6 @@ class SchoolLeavePage extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) => HomePage(
-                    key: textGlobalKey,
                   )),
             );
           },

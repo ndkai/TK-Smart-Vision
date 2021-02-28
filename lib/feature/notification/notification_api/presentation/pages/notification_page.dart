@@ -1,6 +1,7 @@
 import 'dart:io';
-import 'package:android_intent/android_intent.dart';
 import 'package:device_apps/device_apps.dart';
+import 'package:fai_kul/feature/notification/notification_api/presentation/widgets/notification_listview.dart';
+import 'package:fai_kul/main/nar_drawer/home_page.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_appavailability/flutter_appavailability.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,44 +17,38 @@ class NotificationPage extends StatefulWidget {
 class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Center(child: RaisedButton(
+    return Scaffold(
+        appBar: AppBar(
+          title: Center(child: Text("Thông báo"),),
+          leading: new IconButton(
+            icon: new Icon(Icons.arrow_back),
             onPressed: () {
-              // use android_intent package to open other app
-              if (Platform.isAndroid) {
-                getApp();
-              }
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+              );
             },
-            child: Text("Open Facebook")
-        ),)
-    );
+          ),
+          actions: <Widget>[
+            Padding(
+                padding: EdgeInsets.only(right: 20.0, top: 15),
+                child: GestureDetector(
+                    onTap: () {
+                    },
+                    child: Stack(
+                      children: <Widget>[
+                        Icon(
+                          Icons.notifications,
+                          size: 26.0,
+                          color: Colors.yellowAccent,
+                        ), Text("")
+                      ],
+                    ))),
+          ],
+        ),
+        body: SingleChildScrollView(
+            child: Container(
+              child: NotificationListview(),
+        )));
   }
-
-  Future<void> getApp() async {
-    List<Map<String, String>> _installedApps;
-    if (Platform.isAndroid) {
-      _installedApps = await AppAvailability.getInstalledApps();
-      for (var i in _installedApps) {
-        print("appxx:  ${i.toString()}");
-      }
-      bool isInstalled = await DeviceApps.isAppInstalled('com.example.iot_app');
-      // Returns: Map<String, String>{app_name: Chrome, package_name: com.android.chrome, versionCode: null, version_name: 55.0.2883.91}
-      if (isInstalled != false) {
-        try {
-          launch("market://details?id=" + "enetviet.corp.qi.enetvietnew");
-        } on PlatformException catch(e) {
-          launch("https://play.google.com/store/apps/details?id=" + "enetviet.corp.qi.enetvietnew");
-        } finally {
-          launch("https://play.google.com/store/apps/details?id=" + "enetviet.corp.qi.enetvietnew");
-        }
-      }
-      else if (Platform.isIOS) {
-        // iOS doesn't allow to get installed apps.
-        // _installedApps = iOSApps;
-
-        print(await AppAvailability.checkAvailability("calshow://"));
-        // Returns: Map<String, String>{app_name: , package_name: calshow://, versionCode: , version_name: }
-
-      }
-    }
-  }}
+}

@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../injection_container.dart';
-class SchoolLeaveListPage extends StatelessWidget {
+class   SchoolLeaveListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +20,7 @@ class SchoolLeaveListPage extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HomePage(key: textGlobalKey,)),
+                MaterialPageRoute(builder: (context) => HomePage()),
               );
             },
           ),

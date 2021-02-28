@@ -24,7 +24,6 @@ class _DayOffPageState extends State<DayOffPage> {
               context,
               MaterialPageRoute(
                   builder: (context) => HomePage(
-                    key: textGlobalKey,
                   )),
             );
           },

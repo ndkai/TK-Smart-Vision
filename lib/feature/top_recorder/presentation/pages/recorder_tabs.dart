@@ -25,7 +25,7 @@ class _RecorderTabsState extends State<RecorderTabs> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => HomePage(key: textGlobalKey,)),
+                    builder: (context) => HomePage()),
               );
             },
           ),

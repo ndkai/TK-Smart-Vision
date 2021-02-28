@@ -65,9 +65,10 @@ dependencies:
   horizontal_data_table: ^1.0.8
   #dialog
   flutter_custom_dialog: ^1.0.20
+  modal_bottom_sheet: ^1.0.0+1
   #android intent
   open_appstore: ^1.0.2
-  android_intent: ^0.3.7+7 
+#  android_intent: ^0.3.7+7
   url_launcher: ^5.7.10
   device_apps: ^1.2.0
   flutter_appavailability: ^0.0.21

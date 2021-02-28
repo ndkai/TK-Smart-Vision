@@ -33,7 +33,6 @@ class _CommentPageState extends State<CommentPage> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => HomePage(
-                          key: textGlobalKey,
                         )),
               );
             },

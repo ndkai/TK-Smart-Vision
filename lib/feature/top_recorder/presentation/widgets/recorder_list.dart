@@ -128,13 +128,13 @@ class _RecorderListState extends State<RecorderList> {
                       child: Center(
                           child: RatingWidget(start: item.rate.toDouble()/2,
                             onChanged: (int) => {
-                            if(appUser.data.roleName == "GIAOVIEN")
+                            (appUser.data.roleName == "GIAOVIEN")?
                             Navigator.push(
                             context,
                             MaterialPageRoute(
                             builder: (context) => CommentPage(initStart: int, id: item.id,),
                             ),
-                            )
+                            ):Container(),
                           },)
                       )
                   )

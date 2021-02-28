@@ -48,7 +48,6 @@ class _SchedulePageState extends State<SchedulePage> {
               context,
               MaterialPageRoute(
                   builder: (context) => HomePage(
-                        key: textGlobalKey,
                       )),
             );
           },

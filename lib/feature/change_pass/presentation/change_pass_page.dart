@@ -33,7 +33,6 @@ class _ChangePassPageState extends State<ChangePassPage> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => HomePage(
-                          key: textGlobalKey,
                         )),
               );
             },

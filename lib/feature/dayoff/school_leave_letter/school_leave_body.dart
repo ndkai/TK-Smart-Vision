@@ -67,7 +67,6 @@ class _SchoolLeaveBodyState extends State<SchoolLeaveBody> {
               context,
               MaterialPageRoute(
                   builder: (context) => HomePage(
-                    key: textGlobalKey,
                   )),
             );
           },

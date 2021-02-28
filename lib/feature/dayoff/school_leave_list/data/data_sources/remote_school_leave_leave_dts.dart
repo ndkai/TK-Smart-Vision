@@ -23,6 +23,7 @@ class SchoolLeaveDataSourceIpm implements SchoolLeaveListDataSource {
   Future<SchoolLeaveListSwagger> _getFromUrl() async {
     var response;
     if(appUser.data.roleName == "PHUHUYNH"){
+      print("_getFromUrlsch ${appStudent.data.id}");
       response = await client.get(
           '$mainUrl/v1/SchoolLeaveLetter/Fill?EmployeeId=${appStudent.data.id}',
           headers: {
@@ -39,6 +40,7 @@ class SchoolLeaveDataSourceIpm implements SchoolLeaveListDataSource {
       }
 
     print("SchoolLeaveListSwagger ${response.statusCode}");
+    print("SchoolLeaveListSwagger ${response.body}");
     if (response.statusCode == 200 || response.statusCode == 201) {
       var swagger;
       try{

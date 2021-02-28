@@ -31,7 +31,7 @@ Future<void> setAttendanceNotification() async {
           accessTokenFactory: () => Future.value(s),
         )).withAutomaticReconnect()
         .build();
-   connection.serverTimeoutInMilliseconds = 9999;
+   connection.serverTimeoutInMilliseconds = 99999;
     connection.on('GENERAL_EVENT',  (message) async {
       print('GENERAL_EVENT: $message');
       //notication
@@ -90,7 +90,7 @@ void showNotification(int activity) async {
   print("yeu em 3k");
   var android = new AndroidNotificationDetails(
       'id', 'channel ', 'description',
-      priority: Priority.High, importance: Importance.Max);
+      priority: Priority.Default, importance: Importance.Default);
   var iOS = new IOSNotificationDetails();
   var platform = new NotificationDetails(android, iOS);
   if(activity == 0){
@@ -129,7 +129,7 @@ void showNotification2(NotifyResponse notifyResponse) async {
   flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   var initializationSettingsAndroid =
-  AndroidInitializationSettings('ec_logo');
+  AndroidInitializationSettings('titkul_logo');
   var initializationSettingsIOs = IOSInitializationSettings();
   var initSetttings = InitializationSettings(
       initializationSettingsAndroid, initializationSettingsIOs);

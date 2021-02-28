@@ -31,7 +31,7 @@ class TAttendanceHisPage extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HomePage(key: textGlobalKey,)),
+                MaterialPageRoute(builder: (context) => HomePage()),
               );
             },
           ),

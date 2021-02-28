@@ -7,13 +7,21 @@ import 'package:fai_kul/core/utils/permission_helper.dart';
 import 'package:fai_kul/feature/attendance/attendance_method.dart';
 import 'package:fai_kul/feature/attendance_his/domain/repositories/history_attendance_repository.dart';
 import 'package:fai_kul/feature/attendance_his/domain/use_cases/get_local_attendance_his.dart';
+import 'package:fai_kul/feature/attendance_his/presentation/pages/attendance_history_page.dart';
 import 'package:fai_kul/feature/change_pass/change_pass_api.dart';
 import 'package:fai_kul/feature/choosing_role/choosing_role.dart';
 import 'package:fai_kul/feature/dayoff/school_leave_list/presentation/pages/schoolleave_list_page.dart';
 import 'package:fai_kul/feature/login/data/models/login_swagger.dart';
+import 'package:fai_kul/feature/point_input/api/school_class/presentation/pages/class_page.dart';
+import 'package:fai_kul/feature/schedule/schedule_class.dart';
+import 'package:fai_kul/feature/study_point/presentation/pages/studypoint_page.dart';
+import 'package:fai_kul/feature/teacher_attendance_his/presentation/pages/tattendance_history_page.dart';
+import 'package:fai_kul/feature/top_recorder/presentation/pages/recorder_tabs.dart';
+import 'package:fai_kul/feature/tuition_fee/presentation/widgets/fee_page.dart';
 import 'package:fai_kul/main/component/bottom_nar/bottom_nar.dart';
 import 'package:fai_kul/main/component/home_page/card.dart';
 import 'package:fai_kul/main/constant/slider_items.dart';
+import 'package:fai_kul/main/nar_drawer/drawer_pages/info_page.dart';
 import 'package:fai_kul/main/nar_drawer/page_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -87,20 +95,20 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     if (appUser.data.roleName == "PHUHUYNH" ||
         appUser.data.roleName == "GIAOVIEN") {
-      // maybeStartFGS();
+      maybeStartFGS();
     }
 
     Size size = MediaQuery.of(context).size;
     return
-      // WillPopScope(
-      //   onWillPop: _onWillPop,
-      //   child:
+      WillPopScope(
+        onWillPop: _onWillPop,
+        child:
         Scaffold(
             appBar: AppBar(
               title: Text("Trang chủ"),
               actions: <Widget>[
                 Padding(
-                    padding: EdgeInsets.only(right: 20.0, top: 15),
+                    padding: EdgeInsets.only(right: 20.0, top: 0),
                     child: GestureDetector(
                         onTap: () {
                           setNotifyNumber(0);
@@ -148,8 +156,8 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(height: 20),
                 ],
               ),
-            )));
-    // );
+            )))
+    );
   }
 
   Widget slider(Size size) {
@@ -201,11 +209,15 @@ class _HomePageState extends State<HomePage> {
                   child: InkWell(
                     onTap: () {
                       if (appUser.data.roleName == "GIAOVIEN") {
-                        Navigator.pushReplacementNamed(
-                            context, PageRoutes.tattendanceHis);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => TAttendanceHisPage()),
+                        );
                       } else {
-                        Navigator.pushReplacementNamed(
-                            context, PageRoutes.attendanceHis);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => AttendanceHisPage()),
+                        );
                       }
                     }, // handle your onTap here
                     child: CustomCard(
@@ -220,8 +232,10 @@ class _HomePageState extends State<HomePage> {
                     ? Material(
                         color: Colors.transparent,
                         child: InkWell(
-                          onTap: () => Navigator.pushReplacementNamed(
-                              context, PageRoutes.feePage),
+                          onTap: () =>  Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => FeePage()),
+                          ),
                           // handle your onTap here
                           child: CustomCard(
                             image: 'assets/icons/growingmoney.png',
@@ -234,8 +248,10 @@ class _HomePageState extends State<HomePage> {
                     : Material(
                         color: Colors.transparent,
                         child: InkWell(
-                          onTap: () => Navigator.pushReplacementNamed(
-                              context, PageRoutes.recorderTabs),
+                          onTap: () =>  Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => RecorderTabs()),
+                          ),
                           // handle your onTap here
                           child: CustomCard(
                             image: 'assets/images/course_image.png',
@@ -256,8 +272,10 @@ class _HomePageState extends State<HomePage> {
                 Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: () => Navigator.pushReplacementNamed(
-                        context, PageRoutes.studyPoint),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => StudyPointPage()),
+                    ),
                     // handle your onTap here
                     child: CustomCard(
                       image: 'assets/icons/studet_score.png',
@@ -270,8 +288,10 @@ class _HomePageState extends State<HomePage> {
                 Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: () => Navigator.pushReplacementNamed(
-                        context, PageRoutes.schedule),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SchedulePage()),
+                    ),
                     // handle your onTap here
                     child: CustomCard(
                       image: 'assets/icons/schedule_icon.png',
@@ -293,8 +313,10 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.transparent,
                   child: appUser.data.roleName == "PHUHUYNH"
                       ? InkWell(
-                          onTap: () => Navigator.pushReplacementNamed(
-                              context, PageRoutes.recorderTabs),
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => RecorderTabs()),
+                          ),
                           // handle your onTap here
                           child: CustomCard2(
                             image: 'assets/icons/mobietracking.png',
@@ -304,8 +326,10 @@ class _HomePageState extends State<HomePage> {
                           ),
                         )
                       : InkWell(
-                          onTap: () => Navigator.pushReplacementNamed(
-                              context, PageRoutes.schoolClassPage),
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SchoolClassPage()),
+                          ),
                           // handle your onTap here
                           child: CustomCard2(
                             image: 'assets/icons/mobietracking.png',
@@ -318,21 +342,26 @@ class _HomePageState extends State<HomePage> {
                 Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    // onTap: () => Navigator.pushReplacementNamed(
-                    //     context, PageRoutes.schedule), // handle your onTap here
-                    child: CustomCard2(
-                      image: 'assets/icons/comunication.png',
-                      title: "Trao đổi thông tin",
-                      isActive: true,
-                      color: Colors.blueAccent,
-                    ),
-                  ),
-                ),
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SchoolLeaveListPage()),
+                      ),
+                      // handle your onTap here
+                      child: CustomCard2(
+                        image: 'assets/icons/school_leave.png',
+                        title: "Nghỉ phép",
+                        isActive: true,
+                        color: Colors.redAccent,
+                      ),
+                    )),
                 Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: () => Navigator.pushReplacementNamed(
-                        context, PageRoutes.info), // handle your onTap here
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => InfoPage()),
+                    ), // handle your onTap here
                     child: CustomCard2(
                       image: 'assets/icons/support.png',
                       title: "Hỗ trợ",
@@ -346,66 +375,66 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 20,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Material(
-                  color: Colors.transparent,
-                  child: appUser.data.roleName == "PHUHUYNH"
-                      ? InkWell(
-                    onTap: () =>  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => SchoolLeaveListPage()),
-                    ),
-                    // handle your onTap here
-                    child: CustomCard2(
-                      image: 'assets/icons/school_leave.png',
-                      title: "Nghỉ phép",
-                      isActive: true,
-                      color: Colors.redAccent,
-                    ),
-                  )
-                      : InkWell(
-                    onTap: () => Navigator.pushReplacementNamed(
-                        context, PageRoutes.schoolClassPage),
-                    // handle your onTap here
-                    child: CustomCard2(
-                      image: 'assets/icons/mobietracking.png',
-                      title: "Nhập điểm",
-                      isActive: true,
-                      color: Colors.greenAccent,
-                    ),
-                  ),
-                ),
-                Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    // onTap: () => Navigator.pushReplacementNamed(
-                    //     context, PageRoutes.schedule), // handle your onTap here
-                    child: CustomCard2(
-                      image: 'assets/icons/comunication.png',
-                      title: "Trao đổi thông tin",
-                      isActive: true,
-                      color: Colors.blueAccent,
-                    ),
-                  ),
-                ),
-                Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    onTap: () => Navigator.pushReplacementNamed(
-                        context, PageRoutes.info), // handle your onTap here
-                    child: CustomCard2(
-                      image: 'assets/icons/support.png',
-                      title: "Hỗ trợ",
-                      isActive: true,
-                      color: Colors.redAccent,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //   children: <Widget>[
+            //     Material(
+            //       color: Colors.transparent,
+            //       child: appUser.data.roleName == "PHUHUYNH"
+            //           ? InkWell(
+            //         onTap: () =>  Navigator.push(
+            //           context,
+            //           MaterialPageRoute(
+            //               builder: (context) => SchoolLeaveListPage()),
+            //         ),
+            //         // handle your onTap here
+            //         child: CustomCard2(
+            //           image: 'assets/icons/school_leave.png',
+            //           title: "Nghỉ phép",
+            //           isActive: true,
+            //           color: Colors.redAccent,
+            //         ),
+            //       )
+            //           : InkWell(
+            //         onTap: () => Navigator.pushReplacementNamed(
+            //             context, PageRoutes.schoolClassPage),
+            //         // handle your onTap here
+            //         child: CustomCard2(
+            //           image: 'assets/icons/mobietracking.png',
+            //           title: "Nhập điểm",
+            //           isActive: true,
+            //           color: Colors.greenAccent,
+            //         ),
+            //       ),
+            //     ),
+            //     Material(
+            //       color: Colors.transparent,
+            //       child: InkWell(
+            //         // onTap: () => Navigator.pushReplacementNamed(
+            //         //     context, PageRoutes.schedule), // handle your onTap here
+            //         child: CustomCard2(
+            //           image: 'assets/icons/comunication.png',
+            //           title: "....",
+            //           isActive: true,
+            //           color: Colors.blueAccent,
+            //         ),
+            //       ),
+            //     ),
+            //     Material(
+            //       color: Colors.transparent,
+            //       child: InkWell(
+            //         onTap: () => Navigator.pushReplacementNamed(
+            //             context, PageRoutes.info), // handle your onTap here
+            //         child: CustomCard2(
+            //           image: 'assets/icons/support.png',
+            //           title: "....",
+            //           isActive: true,
+            //           color: Colors.redAccent,
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ],
         ));
   }

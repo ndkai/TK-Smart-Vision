@@ -90,7 +90,6 @@ class _LoginInputBodyState extends State<LoginInputBody> {
           print("dang nhap vao r ne ${state.loginResponse.data.email}");
           getCurrentEmployee();
           return HomePage(
-            key: textGlobalKey,
           );
         } else{
           appUser = state.loginResponse;

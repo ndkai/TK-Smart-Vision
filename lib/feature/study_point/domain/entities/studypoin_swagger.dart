@@ -126,7 +126,7 @@ class Employee {
   String district;
   String wardCode;
   String ward;
-  Null address;
+  String address;
   bool hadImages;
   int classId;
   Class classx;
